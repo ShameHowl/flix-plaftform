@@ -3,14 +3,14 @@ server:
 
 spring:
   application:
-    name: catalog-service
+    name: flix-platform
   config:
     import: optional:aws-parameterstore:/config/
 
   datasource:
-    url: jdbc:mysql://localhost:3306/catalog-db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/flix-db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
-    password: flixpassword
+    password: rootpassword
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
