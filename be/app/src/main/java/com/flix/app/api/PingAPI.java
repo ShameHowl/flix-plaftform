@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("/health")
 public class PingAPI {
 
+
+
     @GetMapping
     public String ping() {
-        return "pong";
+        return "OK";
     }
 }
