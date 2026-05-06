@@ -1,0 +1,24 @@
+package com.flix.common.enums;
+
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpStatus;
+
+@Getter
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+public enum ErrorCode {
+
+    USER_NOT_FOUND("User not found", HttpStatus.NOT_FOUND),
+    INVALID_CREDENTIALS("Invalid username or password", HttpStatus.UNAUTHORIZED),
+    EMAIL_ALREADY_EXISTS("Email already exists", HttpStatus.BAD_REQUEST),
+    USERNAME_ALREADY_EXISTS("Username already exists", HttpStatus.BAD_REQUEST),
+    UNAUTHENTICATED("Unauthenticated", HttpStatus.UNAUTHORIZED),
+    FORBIDDEN("Forbidden", HttpStatus.FORBIDDEN),
+    ;
+
+    String message;
+    HttpStatus httpStatus;
+}

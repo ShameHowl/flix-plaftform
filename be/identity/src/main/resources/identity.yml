@@ -1,0 +1,21 @@
+spring:
+  config:
+    import:
+      - optional:aws-parameterstore:/config/flix-platform/identity/common/
+      - optional:aws-parameterstore:/config/flix-platform/identity/${spring.profiles.active}/
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: "your-google-client-id"
+            client-secret: "your-google-client-secret"
+            redirect-uri: "http://localhost:8080/login/oauth2/code/google"
+
+identity:
+  jwt:
+    secret-key: "this-is-a-very-long-and-secure-secret-key-for-flix-plaftform-2026"
+    expiration-seconds: 360000
+  oauth2:
+    redirect-url: "http://localhost:5173/oauth2/callback"
