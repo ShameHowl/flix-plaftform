@@ -1,0 +1,62 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: flix-platfform-collection
+meta:
+  id: wrk_025fcbf1811e497fb6d6a38042ff7277
+  created: 1777289405013
+  modified: 1777306228221
+  description: ""
+collection:
+  - name: health
+    meta:
+      id: fld_f7025b4c39da462cbf0b4b8310a45e0e
+      created: 1777306163416
+      modified: 1777306163416
+      sortKey: -1777306163416
+      description: ""
+    children:
+      - url: "{{ _.baseUrl }}"
+        name: app-health-check
+        meta:
+          id: req_35581e7296574979b4a6052a896e9b74
+          created: 1777306175126
+          modified: 1777306202948
+          isPrivate: false
+          description: ""
+          sortKey: -1777306175126
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: identity
+    meta:
+      id: fld_895103cd58a442a58292df6dbad59c60
+      created: 1777306210395
+      modified: 1777306210395
+      sortKey: -1777306210395
+      description: ""
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_b0444079335491ef5bac8c2e6e64388130a59fa3
+    created: 1777289405037
+    modified: 1777289405037
+environments:
+  name: Base Environment
+  meta:
+    id: env_b0444079335491ef5bac8c2e6e64388130a59fa3
+    created: 1777289405031
+    modified: 1777289462284
+    isPrivate: false
+  data:
+    baseUrl: http://localhost:8080/

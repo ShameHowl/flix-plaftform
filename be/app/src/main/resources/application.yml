@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: flix-platform
+    region:
+      static: us-east-1
+
+  config:
+    import:
+      - optional:classpath:identity.yml
+      - optional:classpath:common.yml
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    validate-on-migrate: true
+    baseline-version: 0
+    locations: classpath:db/migration
+
+  output:
+    ansi:
+      enabled: always
+
+# Health check for prod env
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health"
+  endpoint:
+    env:
+      show-values: never
