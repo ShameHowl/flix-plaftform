@@ -1,10 +1,12 @@
 package com.flix.flixintegrationtest.identity.api.auth
 
+import com.flix.common.dto.ApiResponse
 import com.flix.common.enums.Role
 import com.flix.flixintegrationtest.common.BaseITSpec
 import com.flix.flixintegrationtest.identity.config.BaseIT
 import io.restassured.RestAssured
 import org.springframework.http.HttpStatus
+import org.springframework.http.ProblemDetail
 
 class AuthIT extends BaseITSpec {
 
@@ -25,14 +27,16 @@ class AuthIT extends BaseITSpec {
     }
 
     def "should fail login with invalid credentials"() {
-        when:
-        def response = RestAssured.given()
-                .body([username: "asdasd", password: "asdasd"])
-                .post(BaseIT.LOGIN_API)
-        then:
-        response.statusCode() == 401
-        response.body().jsonPath().getString("detail").equalsIgnoreCase("Invalid username or password")
+        given:
+        def invalidUserCredential = [username: "asdasd", password: "asdasd"]
 
+        when:
+        def resp = postRequest(BaseIT.LOGIN_API, invalidUserCredential)
+                .returnResult(ProblemDetail)
+
+        then:
+        resp.status == HttpStatus.UNAUTHORIZED
+        resp.responseBody.detail == "Invalid username or password"
     }
 
     //Register Tests
@@ -84,6 +88,21 @@ class AuthIT extends BaseITSpec {
         "missing username"     | [username: "", email: "asdasda@gmail.com", password: "123"]
         "missing email"        | [username: "test", email: "", password: "123"]
         "missing password"     | [username: "test", email: "asdasda@gmail.com", password: ""]
+    }
+
+    def "should return true when provider is local"() {
+        given:
+        createNormalUser()
+        String token = getNormalUserToken()
+
+        when:
+        def resp = getApiResponse(BaseIT.IS_LOCAL_PROVIDER, token)
+                .returnResult(ApiResponse)
+
+        then:
+        resp.status == HttpStatus.OK
+        resp.responseBody.data == true
+
     }
 
 
