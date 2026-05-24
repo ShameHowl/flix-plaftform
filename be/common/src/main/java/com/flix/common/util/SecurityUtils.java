@@ -16,6 +16,7 @@ public class SecurityUtils {
     }
 
     public static Long getCurrentUserId(Jwt jwt) {
+        log.debug("Extracting user ID from JWT: {}", jwt);
         return jwt.getClaim(USER_ID);
     }
 
